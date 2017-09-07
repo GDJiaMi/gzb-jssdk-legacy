@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="date=no">
+	<meta name="format-detection" content="address=no">
+	<title>Api</title>
+
+	<link rel="stylesheet" href="static/codemirror/codemirror.css">
+    <link rel="stylesheet" href="static/codemirror/api.css">
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/customApi.js"></script>
+	<script src="static/codemirror/codemirror.js"></script>
+	<script src="static/codemirror/javascript.js"></script>
+	<script src="static/codemirror/active-line.js"></script>
+	<script src="static/codemirror/matchbrackets.js"></script>
+
+</head>
+
+<body>
+
+	<div class="api">
+
+		<dl class="item cur" id="makeCallToNumber"  name="makeCallToNumber">
+			<dt>makeCallToNumber</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{'callNumber':电话号码}</pre>
+				<textarea>
+	WebViewJavascriptBridge.callHandler('makeCallToNumber',
+		{
+			'callNumber': 13800138000
+		},
+		function(response) {
+			log('JS got response', response)
+		});
+				</textarea>
+				<a href="javascript:void(0)" onclick="makeCallToNumber(13800138000);">打电话:13800138000 </a></dd>
+		</dl>
+		<dl class="item" id="sendSmsToNumber" name="sendSmsToNumber">
+			<dt>sendSmsToNumber</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{'callNumber':电话号码}</pre>
+			<textarea>
+	 WebViewJavascriptBridge.callHandler('sendSmsToNumber',
+		 {
+			'callNumber': 13800138000
+		 },
+		 function (response) {
+			log('JS got response', response)
+		});
+				</textarea>
+				<a href="javascript:void(0)" onclick="sendSmsToNumber(13800138000);">发短信:13800138000 </a></dd>
+		</dl>
+		<dl class="item" id="openContactItem"  name="openContactItem">
+			<dt>openContactItem</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>{'callNumber':用户id}</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('openContactItem',
+		{
+			'id': id
+		},
+			function (response) {
+
+			log('JS got response', response)
+		});
+				</textarea>
+				<a href="javascript:void(0)" id="video" onclick="contactItem('u116115');"> 打开名片</a></dd>
+		</dl>
+		<dl class="item" id="openContact" name="openContact">
+			<dt>openContact</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+			<br/>user:[{'id':'userId1','name':'用户名1'},{'id':'userId2','name':'用户名2'}],
+			<br/>'tenementId','公司ID',
+			<br/>'limit':选人限制,
+			<br/>'unselect':支持反向选择user参数的联系人，默认为true,
+			<br/>type:'single'单选,其它为多选
+			</pre>
+			<pre>回调:
+			<br/>response:[{'id':'userId1','name':'用户名1','avatar':'头像'},
+			</br/>{'id':'userId2','name':'用户名2','avatar':'头像'}]
+			</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('openContact',
+	{
+		'user': [{
+			'id': 'u116115',
+			'name': '陈天送'
+		}],
+		'type': 'unsingle',
+		'tenementId': 't140050483060650196',
+		'unselect':false,//不能取消选择u116115
+		'limit': 10
+
+	},
+	function (response) {
+	//回调
+	var re = eval(response);
+	for (var i = 0, j = re.length; i < j; i++) {
+	alert('用户ID:' + re[i].id + '名称:' + re[i].name + 'pic:' + re[i].avatar);
+	}
+
+	});
+
+			</textarea>
+			<a href="javascript:void(0)" id="video" onclick="contact();">选择联系人</a></dd>
+		</dl>
+		<dl class="item" id="openDate"  name="openDate">
+			<dt>openDate</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{'format':'yyyy-MM-dd hh:mm',
+				<br/>'type':'dateTime/date/time',
+				<br/>'default':'yyyy-MM-dd hh:mm'}
+				</pre>
+				<pre>返回:<br/>按format返回格式
+				</pre>
+					<textarea>
+	WebViewJavascriptBridge.callHandler('openDate',
+		{
+			'format': 'yyyy-MM-dd',
+			'type': 'date',
+			'default': '2015-10-01'
+		},
+		 function (response) {
+
+		alert('你选择的日期是:' + response)
+	});
+				</textarea>
+			<a href="javascript:void(0)" onclick="showDate('yyyy-MM-dd hh:mm');">调用日期控件</a>
+				系统自带方式<input type="date">
+			</dd>
+		</dl>
+		<dl class="item" id="setBarColor" name="setBarColor">
+			<dt>setBarColor</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{'color': 颜色}
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('setBarColor',
+	{
+		'color': '#000000'
+	}, function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="setBarColor('#000000');">设置bar条颜色为黑色</a> </dd>
+		</dl>
+		<dl class="item" id="setWebTitle" name="setWebTitle">
+			<dt>setWebTitle</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>{'title': 标题}
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('setWebTitle',
+	{
+		'title': '页面标题'
+	}, function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="setWebTitle('页面标题');">设置页面标题</a></dd>
+		</dl>
+
+		<dl class="item" id="ShowMenu" name="ShowMenu">
+			<dt>ShowMenu</dt>
+			<dd>
+			<div class="sup"><i class="win"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('showMenu',
+	{}, function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="showMenu();">显示导航条</a></dd>
+		</dl>
+
+		<dl class="item" id="exitWebApp" name="exitWebApp">
+			<dt>exitWebApp</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('exitWebApp',
+	 {},
+	 function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="exitWebApp();">退出WEB应用</a></dd>
+		</dl>
+		<dl class="item" id="showBar" name="showBar">
+			<dt>showBar</dt>
+			<dd><div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{'flag': true/false}
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('showBar',
+	{
+		'flag': false
+	}, function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="showBar(false);">显示bar条</a></dd>
+		</dl>
+
+
+		<dl class="item" id="setGps" name="setGps">
+			<dt>setGps</dt>
+			<dd><div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('setGps',
+	{}, function (response) {
+
+		log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="setGps();">调用GPS设置</a></dd>
+		</dl>
+		<dl class="item" id="getLocation" name="getLocation">
+			<dt>getLocation</dt>
+			<dd><div class="sup"><i class="android"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<pre>回调:
+			<br/>response:{'longitude':'经度','latitude':'纬度','address':'中文地址'}
+
+			</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('getLocation',
+	{}, function (response) {
+        alert(response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="getLocation();">取地理位置</a></dd>
+		</dl>
+
+		<dl class="item" id="openMail" name="openMail">
+			<dt>openMail</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>{'email':邮件地址}</pre>
+				<textarea>
+	WebViewJavascriptBridge.callHandler('openMail',
+		{
+			'email': 'ts-chen@mygzb.com'
+		},
+		function(response) {
+			log('JS got response', response)
+		});
+				</textarea>
+				<a href="javascript:void(0)" onclick="openMail('ts-chen@mygzb.com');">发邮件:ts-chen@mygzb.com </a></dd>
+		</dl>
+    <dl class="item" id="openUrl" name="openUrl">
+			<dt>openUrl</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>{'url':网址}</pre>
+				<textarea>
+	WebViewJavascriptBridge.callHandler('openUrl',
+		{
+			'url': 'http://www.mygzb.com',
+			'showMode': "inner/outer"    //inner内部浏览器, outer系统浏览器(默认值)
+		},
+		function(response) {
+			log('JS got response', response)
+		});
+				</textarea>
+				<a href="javascript:void(0)" onclick="openUrl('http://www.mygzb.com');">打开链接:www.mygzb.com</a>
+				<select id="openurlSel">
+					<option value="outer">系统浏览器</option>
+					<option value="inner">内部浏览器</option>
+				</select>
+				</dd>
+		</dl>
+	    <dl class="item" id="setBar" name="setBar">
+			<dt>setBar</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>{
+hideMoreBtn:'true',      //隐藏右边按钮,默认为false不隐藏,显示更多按钮,
+left:['close', 'goback'], //左边按钮 close 关闭， goback 返回
+onlyCallBack:['close'], //左边只走回调的按钮
+gobackUrl:'http://www.baidu.com',//点返回时打开url, 为空即为正常返回
+right:'保存'           //右边按钮 替换文字
+}</pre>
+                        <pre>回调:
+			<br/>response:{buttonName：'保存'，result：'true', buttonId:'close'}
+
+			</pre>
+				<textarea>
+	WebViewJavascriptBridge.callHandler('setBar',{
+						
+						hideMoreBtn:'false',      //隐藏右边按钮,默认为false不隐藏,显示更多按钮,
+						
+						left:['close', 'goback'], //左边按钮
+						
+						onlyCallBack:['close'], //左边只走回调的按钮
+						
+						gobackUrl:'http://www.baidu.com',//点返回时打开url, 为空即为正常返回
+
+						right:'保存'           //右边按钮 替换文字
+                    },
+
+                        function (response) {
+
+                            //点击right按钮成功时返回数据
+                            //{buttonName：'保存'，result：'true', buttonId:"close"}
+
+                          var re = eval(response);
+                              fn(re);
+
+                        });
+				</textarea>
+				<a href="javascript:void(0)" onclick="setBar();">设置bar</a></dd>
+		</dl>
+		
+		<dl class="item" id="windowClose" name="windowClose">
+			<dt>WindowClose</dt>
+			<dd>
+			<div class="sup"><i class="win"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('windowClose',
+	{}, function (response) {
+
+		log('windowClose response', response);
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="windowClose();">PC关闭回调</a></dd>
+		</dl>
+		
+		<dl class="item" id="pgGoBack" name="pgGoBack">
+			<dt>PgGoBack</dt>
+			<dd>
+			<div class="sup"><i class="win"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('pgGoBack',
+	{}, function (response) {
+
+		log('pgGoBack response', response);
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="pgGoBack();">PC关闭回调</a></dd>
+		</dl>
+		
+		<dl class="item" id="getList" name="getList">
+			<dt>getList</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>无</pre>
+                        <pre>回调:
+			<br/>response:{
+
+              'plat':'IOS',                                   //平台:IOS/PC/Android,
+              'version': 'v1.0.0',                            //工作宝版本号
+              'apilist':['openContact','openUrl','openMail']  //返回当前可用接口名称
+
+               }
+
+			</pre>
+				<textarea>
+	WebViewJavascriptBridge.callHandler('apiList',{},
+
+                        function (response) {
+
+                            /* 返回数据
+
+                            {
+
+                            'plat':'IOS',                                   //平台:IOS/PC/Android,
+                            'version': 'v1.0.0',                            //工作宝版本号
+                            'apilist':['openContact','openUrl','openMail']  //返回当前可用接口名称
+
+                            }
+
+                            */
+
+                            console.log(response)
+                        });
+				</textarea>
+				<a href="javascript:void(0)" onclick="getApiList();">getList</a></dd>
+		</dl>
+
+		<dl class="item" id="webLog" name="webLog">
+			<dt>webLog</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>无</pre>
+                        <pre>回调:
+			<br/>response:{
+
+              'result'：'true',              //日志写入状态 成功'true',失败'false'
+              'time': '2015-12-20 20:10:30'  //日志写入时间
+
+               }
+
+			</pre>
+				<textarea>
+WebViewJavascriptBridge.callHandler('webLog',
+                    {'text':str},
+                    function (response) {
+
+                    /* 返回数据
+
+                        {
+                        'result'：'true',              //日志写入状态 成功'true',失败'false'
+                        'time': '2015-12-20 20:10:30'  //日志写入时间
+                        }
+
+                    */
+                    console.log(response);
+
+				});
+				</textarea>
+				<a href="javascript:void(0)" onclick="writerLog('测试日志写入');">webLog</a></dd>
+		</dl>
+
+		<dl class="item" id="QRcord"  name="QRcord">
+			<dt>scanQRCode</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>needResult:true //默认为true,即将二维码内容直接返回，false则表示扫描结果由工作宝直接处理 </pre>
+                        <pre>回调:
+			<br/>response:{
+				'content'：'二维码内容'
+			}
+
+			</pre>
+				<textarea>
+					WebViewJavascriptBridge.callHandler('scanQRCode',
+					{
+					needResult:true
+					},
+					  function (response) {
+					   alert(response)
+					  });
+				</textarea>
+				<a href="javascript:void(0)" onclick="QRcord();">scanQRCode</a>
+				<a href="qrcode/index.html">生成二维码</a>
+				</dd>
+		</dl>
+
+		<dl class="item" id="Dialog" name="Dialog">
+			<dt>openDialog</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>
+{
+	type: 1,	//会话类型：1，群聊，2，单聊，3，公告广播
+	id: 0,   	//会话ID， 群组id或个人id
+	messageId:'' //消息记录ID
+}
+ messageId 不为空时
+<table width="100%" border="1" style="border-collapse:collapse; line-height:32px">
+	<tr>
+		<th align="center">本地数据库</th>
+		<th align="center">操作</th>
+		<th align="center">toast提示</th>
+	</tr>
+	<tr>
+		<td align="center">有且在7天内</td>
+		<td align="center">打开会话窗,定位到该条记录</td>
+		<td align="center">无</td>
+	</tr>
+	<tr>
+		<td align="center">有但不在7天内</td>
+		<td align="center">打开会话窗</td>
+		<td align="center">请下拉加载或搜索查看该条记录</td>
+	</tr>
+	<tr>
+		<td align="center">无</td>
+		<td align="center">打开会话窗</td>
+		<td align="center">无</td>
+	</tr>
+</table>
+		</pre>
+		
+		<pre>回调:无</pre>
+		
+				<textarea>
+	WebViewJavascriptBridge.callHandler('openDialog',
+		{
+			type:2,
+			id:'u116115',
+			messageId:''
+		},
+		function (response){}
+	);
+				</textarea>
+				会话类型：<select id="opendDialogType">
+					<option value="1">群聊</option>
+					<option value="2" selected>单聊</option>
+					<option value="3">公告</option>
+				</select>
+				会话ID：<input type="text" value="u116115" id="opendDialogId" />
+				消息记录ID：<input type="text" value="f584fcf4-dcac-4f0c-afb2-8dd1e18d9104" id="opendDialogMsgId" />
+				<a href="javascript:void(0)" onclick="Dialog();">打开会话</a>
+		</dd>
+		</dl>
+		<dl class="item" id="webApp" name="webApp">
+			<dt>openWebApp</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>参数:
+				<br/>{
+			id: 0//应用id
+			}
+		</pre>
+						<pre>回调:无
+
+			</pre>
+				<textarea>
+					WebViewJavascriptBridge.callHandler('openWebApp',
+					{
+						id:'10001'
+						},
+						  function (response) {});
+				</textarea>
+				<a href="javascript:void(0)" onclick="webApp();">打开web应用</a></dd>
+		</dl>
+		
+		<dl class="item" id="shareTo" name="shareTo">
+			<dt>shareTo</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i></div>
+			<pre>参数:
+				<br/>无
+				</pre>
+			<textarea>
+	WebViewJavascriptBridge.callHandler('shareTo',
+	 {},
+	 function (response) {
+
+		console.log('JS got response', response)
+	});
+				</textarea>
+				<a href="javascript:void(0)" onclick="shareTo();">分享到</a></dd>
+		</dl>
+		
+		
+		<dl class="item" id="chooseImg" name="chooseImg">
+			<dt>chooseImg</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>
+参数:
+{
+	quality:100, //质量 100表示100% 80表示 80% 默认100
+	targetType:"default/width/height",//为空时表示不缩放
+	target: 300,
+	extType:"图片扩展类型,值可为["bmp","gif","jpg","png"] 为[]空时表示任何图片类型",
+	maxSizeKb: 1024 //原始图片最大大小(单位kb) 0表示不限制
+}
+
+执行顺序： 先进行质量压缩，再进行尺寸缩放；
+压缩: 只对jpg,jpeg,png进行质量压缩;
+
+				</pre>
+
+  缩放参数说明
+<table width="100%" border="1" style="border-collapse:collapse; line-height:32px">
+	<tr>
+		<th align="left" style="text-indent:10px">说明</th>
+		<th align="center">targetType</th>
+		<th align="center">图片尺寸</th>
+		<th align="center">target</th>
+		<th align="center">缩放后尺寸</th>
+	</tr>
+	<tr>
+		<td style="text-indent:10px">按最长进行等比例缩放</td>
+		<td align="center">default</td>
+		<td align="center">800*600</td>
+		<td align="center">400</td>
+		<td align="center">400*300</td>
+	</tr>
+	<tr>
+		<td style="text-indent:10px">按宽度等比例缩放</td>
+		<td align="center">width</td>
+		<td align="center">800*600</td>
+		<td align="center">200</td>
+		<td align="center">800/3*200</td>
+	</tr>
+	<tr>
+		<td style="text-indent:10px">按高度等比例缩放</td>
+		<td align="center">height</td>
+		<td align="center">800*600</td>
+		<td align="center">200</td>
+		<td align="center">200*600/4</td>
+	</tr>
+</table>
+				<pre>
+回调:
+response:{	
+	result:'true 表示成功，false表示失败', 
+	quality:'base64Data图片质量', 
+	imgData:'图片base64数据', 
+	imgType:'图片扩展类型', 
+	imgWidth:'base64Data图片宽',
+	imgHeight:'base64Data图片高度',
+	errCode:'错误码,当result为false时才有',
+	errMsg:'错误信息,当result为false时才有'
+}
+				</pre>
+错误码说明
+<table width="100%" border="1" style="border-collapse:collapse; line-height:32px">
+	<tr>
+		<th align="center">错误码errCode</th>
+		<th align="center">错误信息errMsg</th>
+		<th align="center">描述</th>
+	</tr>
+	<tr>
+		<td align="center">701</td>
+		<td align="center">图片选择失败</td>
+		<td align="center">读取图片异常时提示</td>
+	</tr>
+	<tr>
+		<td align="center">702</td>
+		<td align="center">请选择[extType](png,jpg)类型图片</td>
+		<td align="center">extType有设置时，提示</td>
+	</tr>
+	<tr>
+		<td align="center">703</td>
+		<td align="center">图片原始大小超过[maxSizeKb]kb</td>
+		<td align="center">图片原始大小超过maxSizeKb时提示</td>
+	</tr>
+	<tr>
+		<td align="center">704</td>
+		<td align="center">用户取消选择</td>
+		<td align="center">用户主动取消选择图片时提示</td>
+	</tr>
+	<tr>
+		<td align="center">705</td>
+		<td align="center">图片压缩失败</td>
+		<td align="center">quality有设置,进行压缩失败时提示</td>
+	</tr>
+	<tr>
+		<td align="center">706</td>
+		<td align="center">图片缩放失败</td>
+		<td align="center">进行缩放失败时提示</td>
+	</tr>
+</table>
+				<textarea>
+				WebViewJavascriptBridge.callHandler('chooseImg',{
+					quality:80,
+					targetType:'default',
+					target:300,
+					extType:[]
+					maxSizeKb:10240
+				},
+				function (response) {
+					var re = eval(response);
+					  fn(re);
+				});
+				</textarea>
+				<a href="javascript:void(0)" onclick="chooseImg();">选择图片</a></dd>
+				<select id="chooseImgSel">
+					<option value="">所有图片</option>
+					<option value="png,jpg">png,jpg</option>
+					<option value="jpg">jpg</option>
+				</select>
+				质量：
+				<select id="chooseImgQuanity">
+					<option value="100">100%</option>
+					<option value="80">80%</option>
+					<option value="60">60%</option>
+					<option value="50">50%</option>
+					<option value="30">30%</option>
+				</select>
+				<br/>
+				缩放类型：
+				<select id="chooseImgTargetType">
+					<option value="default">按最长进行等比例缩放(default)</option>
+					<option value="width">按宽度等比例缩放(width)</option>
+					<option value="height">按高度等比例缩放(height)</option>
+				</select>
+				<br/>
+				缩放值：
+				<input type="number" id="chooseImgTarget" value="300" />px 
+				<br/>
+				原始图片最大值：
+				<input type="number" id="chooseImgMaxSize" value="0" />kb
+				<div style="display:none;" id="showConvertImg">
+					<div>请求数据：</div>
+					<span id="convertImgReq"></span>
+					<div>返回数据：</div>
+					<span id="convertImgResponse"></span>
+					<div>JS加载图片获得数据： </div>
+					<span id="convertImgJsLoad"></span>
+					<div> </div>
+					<img>
+				</div>
+				<div style="height:100px"></div>
+		</dl>
+		
+		
+		<dl class="item" id="selectSession" name="selectSession">
+			<dt>selectSession</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>
+参数:
+{
+	multiple:true, //true多选，false单选 默认单选
+	title:'选择会话界面标题，为空是使用客户端默认值“选择目标”'
+}
+
+				</pre>
+  
+				<pre>
+回调:
+response:{	
+	result:"true 表示成功，false表示失败",
+	session:[
+		{
+			sessionType:'会话类型 chatroom 群聊 user单聊',
+			sessionId:'会话ID'
+		}
+		...
+	]
+	errCode:'错误码,当result为false时才有',
+	errMsg:'错误信息,当result为false时才有'
+}
+				</pre>
+
+错误码说明
+<table width="100%" border="1" style="border-collapse:collapse; line-height:32px">
+	<tr>
+		<th align="center">错误码errCode</th>
+		<th align="center">错误信息errMsg</th>
+		<th align="center">描述</th>
+	</tr>
+	<tr>
+		<td align="center">701</td>
+		<td align="center">选择失败</td>
+		<td align="center">未知异常时提示</td>
+	</tr>
+	<tr>
+		<td align="center">704</td>
+		<td align="center">用户取消选择</td>
+		<td align="center">用户主动取消选择会话时提示</td>
+	</tr>
+</table>
+
+				<textarea>
+				WebViewJavascriptBridge.callHandler('selectSession',{
+					multiple:false,
+					title:''
+				},
+				function (response) {
+					var re = eval(response);
+					  fn(re);
+				});
+				</textarea>
+				<a href="javascript:void(0)" onclick="selectSession();">选择会话</a></dd>
+				<select id="selectSessionMultiple">
+					<option value="">单选</option>
+					<option value="1">多选</option>
+				</select>
+				<input type="text" id="selectSessionTitle" value="选择目标"/>
+				<div style="display:none;" id="showSelectSession">
+					<div>请求数据：</div>
+					<span id="selectSessionReq"></span>
+					<div>返回数据：</div>
+					<span id="selectSessionResponse"></span>
+				</div>
+				<div style="height:100px"></div>
+		</dl>
+		
+		
+		<dl class="item" id="getLanguage" name="getLanguage">
+			<dt>getLanguage</dt>
+			<dd>
+			<div class="sup"><i class="android"></i><i class="ios"></i><i class="win"></i></div>
+			<pre>
+参数:
+{
+}
+				</pre>
+  
+				<pre>
+回调:
+response:{	
+	result:"true 表示成功，false表示失败",
+	language:'zh-CN', //zh-CN：简体中文，zh-TW；繁体中文，en-US：英文
+	errCode:'错误码,当result为false时才有',
+	errMsg:'错误信息,当result为false时才有'
+}
+				</pre>
+
+错误码说明
+<table width="100%" border="1" style="border-collapse:collapse; line-height:32px">
+	<tr>
+		<th align="center">错误码errCode</th>
+		<th align="center">错误信息errMsg</th>
+		<th align="center">描述</th>
+	</tr>
+	<tr>
+		<td align="center">701</td>
+		<td align="center">获取语言失败</td>
+		<td align="center">未知异常时提示</td>
+	</tr>
+</table>
+
+				<textarea>
+				WebViewJavascriptBridge.callHandler('getLanguage',{
+				},
+				function (response) {
+					var re = eval(response);
+					  fn(re);
+				});
+				</textarea>
+				<a href="javascript:void(0)" onclick="getLanguage();">获取语言</a></dd>
+				<div style="display:none;" id="showGetLanguage">
+					<div>返回数据：</div>
+					<span id="getLanguageResponse"></span>
+				</div>
+				<div style="height:100px"></div>
+		</dl>
+
+		<ul class="menu" id="apiMenu">
+			<li><a href="javascript:void(0);" rel="makeCallToNumber" >打电话</a></li>
+			<li><a href="javascript:void(0);" rel="sendSmsToNumber" >发短信</a></li>
+			<li><a href="javascript:void(0);" rel="openContactItem" >打开名片</a></li>
+			<li><a href="javascript:void(0);" rel="openContact" >选择联系人</a></li>
+			<li><a href="javascript:void(0);" rel="openDate" >日期控件</a></li>
+			<li><a href="javascript:void(0);" rel="setBarColor" >bar条颜色</a></li>
+			<li><a href="javascript:void(0);" rel="showBar" >显示bar条</a></li>
+			<li><a href="javascript:void(0);" rel="setWebTitle" >页面标题</a></li>
+			<li><a href="javascript:void(0);" rel="exitWebApp" >退出WEB应用</a></li>
+			<li><a href="javascript:void(0);" rel="setGps" >调用GPS设置</a></li>
+			<li><a href="javascript:void(0);" rel="getLocation" >取地理位置</a></li>
+			<li><a href="javascript:void(0);" rel="openMail" >打开邮件</a></li>
+			<li><a href="javascript:void(0);" rel="openUrl" >打开链接</a></li>
+			<li><a href="javascript:void(0);" rel="setBar" >设置bar</a></li>
+			<li><a href="javascript:void(0);" rel="windowClose" >PC关闭回调</a></li>
+			<li><a href="javascript:void(0);" rel="pgGoBack" >PC返回回调</a></li>
+			<li><a href="javascript:void(0);" rel="getList" >取接口名称</a></li>
+			<li><a href="javascript:void(0);" rel="webLog" >写日志</a></li>
+			<li><a href="javascript:void(0);" rel="QRcord" >扫一扫</a></li>
+			<li><a href="javascript:void(0);" rel="Dialog" >会话框</a></li>
+			<li><a href="javascript:void(0);" rel="webApp" >打开应用</a></li>
+			<li><a href="javascript:void(0);" rel="shareTo" >分享到</a></li>
+			<li><a href="javascript:void(0);" rel="chooseImg" >选择图片</a></li>
+			<li><a href="javascript:void(0);" rel="selectSession" >选择会话</a></li>
+			<li><a href="javascript:void(0);" rel="getLanguage" >获取语言</a></li>
+		</ul>
+	</div>
+
+	<!--
+
+    <a href="javascript:void(0)" onclick="openCamera();">打开照相机</a>
+
+	<a href="javascript:void(0)" onclick="openAlbum ();">打开相册</a>
+
+	<a href="javascript:void(0)" onclick="openVideo ();">打开摄像头</a>
+
+    <a href="javascript:void(0)" id="video" onclick="showVideo();">调用摄像头</a>
+
+    <div class="cam" id="cambox">
+    <video autoplay  style="height:300px; width:100%" id="videoElement"></video>
+    <canvas id="canvas" style="height:300px; width:100%; display:none"></canvas>
+    </div>
+    <a href="javascript:void(0)" onclick="mainbar('left');">显示 关闭(左边,右边，中间) 按钮</a>
+
+    <a href="javascript:void(0)" onclick="mainbarRe('left');">显示 返回(左边,右边，中间) 按钮</a>
+
+
+
+-->
+<script src="static/js/api.js"></script>
+<script src="static/js/eruda.min.js"  type="text/javascript"></script>
+<script>
+eruda.init();
+</script>
+</body>
+
+</html>

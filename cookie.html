@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="date=no">
+<meta name="format-detection" content="address=no">
+<title>cookie</title>
+<script type="text/javascript">
+var cookieName = 'test_cookie_live';
+function getCookie(c_name){
+	if (document.cookie.length>0){
+		c_start=document.cookie.indexOf(c_name + "=");
+		if (c_start!=-1){ 
+			c_start = c_start + c_name.length+1;
+			c_end = document.cookie.indexOf(";",c_start);
+			if (c_end==-1){
+				c_end=document.cookie.length;
+			}
+			return unescape(document.cookie.substring(c_start,c_end));
+		} 
+	}
+	return "";
+}
+
+function setCookie(c_name,value,expireSec){
+	if(isNaN(expireSec)){
+		alert('请输入正确的秒数');
+	}
+	var tmpExp = -1;
+	if(-1!=expireSec){
+		var exdate=new Date();
+		exdate.setTime(exdate.getTime()+expireSec*1000);
+		tmpExp = exdate.toGMTString();
+	}
+	document.cookie = c_name
+					+ "=" 
+					+escape(value)
+					+((expireSec==null) ? "" : ";expires="+tmpExp);
+}
+
+function checkCookie(){
+	username=getCookie('username');
+	if (username!=null && username!=""){
+		alert('Welcome again '+username+'!')
+	}else{
+		username=prompt('Please enter your name:',"");
+	}
+		
+	if (username!=null && username!=""){
+		setCookie('username',username,365)
+	}
+	setCookie(cookieName,'adfccc---ddddf',10);
+}
+
+function trim(str){
+	return str.replace(/(^\s*)|(\s*$)/g, ''); 
+}
+
+function toSet(){
+	var expireval = document.getElementById('expire_val').value;
+	var ckVal = document.getElementById('ck_val').value;
+	expireval = trim(expireval);
+	ckVal = trim(ckVal);
+	if(isNaN(expireval)){
+		alert('请输入正确的有效时间');
+		return ;
+	}
+	if(''==ckVal){
+		alert('请输入cookie值');
+		return ;
+	}
+	setCookie(cookieName,ckVal,expireval);
+}
+
+function toGet(){
+	console.log(getCookie(cookieName));
+	document.getElementById('ct_ck').innerHTML = getCookie(cookieName);
+}
+</script>
+<style>
+.main{width:300px;margin:100px auto; line-height:50px;font-size:18px;}
+.main div{line-height:50px; height:50px;}
+.main div button{margin-top:5px;height:28px;}
+.main div input{width:100px; height:28px;}
+</style>
+</head>
+<body onload="toGet()">
+	<div class="main">
+		<div>cookie有效时间：<input type="text" value="-1" id="expire_val" />秒</div>
+		<div>-1表示当前浏览器有效</div>
+		<div>cookie存储值为：<input type="text" value="" id="ck_val" /></div>
+		<div><button onclick="toSet()">设置</button></div>
+		<div>当前cookie值为：<span id="ct_ck"><span></div>
+		<div><button onclick="toGet()">刷新</button></div>
+	</div>
+</body>
+</html>

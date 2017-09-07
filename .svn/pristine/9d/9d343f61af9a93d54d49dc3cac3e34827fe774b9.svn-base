@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="date=no">
+<meta name="format-detection" content="address=no">
+<title>session</title>
+<script type="text/javascript">
+var sessionItemKey = 'test_session_live';
+function getSession(c_name){
+	return sessionStorage.getItem(c_name);
+}
+
+function setSession(c_name,value){
+	sessionStorage.setItem(c_name, value);
+}
+
+function trim(str){
+	return str.replace(/(^\s*)|(\s*$)/g, ''); 
+}
+
+function toSet(){
+	var ckVal = document.getElementById('ck_val').value;
+	ckVal = trim(ckVal);
+	if(''==ckVal){
+		alert('请输入cookie值');
+		return ;
+	}
+	setSession(sessionItemKey,ckVal);
+}
+
+function toGet(){
+	console.log(getSession(sessionItemKey));
+	document.getElementById('ct_ck').innerHTML = getSession(sessionItemKey);
+}
+</script>
+<style>
+.main{width:300px;margin:100px auto; line-height:50px;font-size:18px;}
+.main div{line-height:50px; height:50px;}
+.main div button{margin-top:5px;height:28px;}
+.main div input{width:100px; height:28px;}
+</style>
+</head>
+<body onload="toGet()">
+	<div class="main">
+		<div>存储值为：<input type="text" value="" id="ck_val" /></div>
+		<div><button onclick="toSet()">设置</button></div>
+		<div>当前session值为：<span id="ct_ck"><span></div>
+		<div><button onclick="toGet()">刷新</button></div>
+	</div>
+</body>
+</html>

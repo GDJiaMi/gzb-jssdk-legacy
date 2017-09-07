@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS-SDK Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <!--引用工作宝客户端 api -->
+  <script src="static/js/customApi.js?v=2017032101"  type="text/javascript"></script>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body ontouchstart="">
+<div class="wxapi_container">  
+    <div class="wxapi_index_container">
+      <ul class="label_box lbox_close wxapi_index_list">
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#makeCallToNumber">电话接口</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#sendSmsToNumber">短信接口</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openContactItem">显示名片</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openContact">选择联系人</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openDate">日期控件</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#getLocation">取地理位置</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#exitWebApp">退出应用</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openUrl">打开URL</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openMail">打开Email</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#setWebTitle">设置标题</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#setBarColor">设置bar颜色</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#showBar">显示/隐藏bar</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#setBar">设置bar</a></li>
+		<li class="label_item wxapi_index_item"><a class="label_inner" href="#setBarClose">设置bar close回调</a></li>
+		<li class="label_item wxapi_index_item"><a class="label_inner" href="#pcWinodwClose">设置PC关闭回调</a></li>
+		<li class="label_item wxapi_index_item"><a class="label_inner" href="#pgGoBack">设置PC返回回调</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#apiList">取接口名称</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#webLog">写入日志</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#pullDownRefresh">下拉刷新</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#QRcord">扫一扫</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#Dialog">对话框</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#openWebApp">打开应用</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#shareTo">分享接口</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#chooseImg">选择图片</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#selectSession">选择会话</a></li>
+        <li class="label_item wxapi_index_item"><a class="label_inner" href="#getLanguage">获取语言</a></li>
+
+    </div>
+    <div class="lbox_close wxapi_form">
+      <h3 id="makeCallToNumber">电话接口</h3>
+      <span class="desc">调用电话</span>
+      <button class="btn btn_primary" id="makeCallToNumberBtn">makeCallToNumber</button>
+
+      <h3 id="sendSmsToNumber">短信接口</h3>
+      <span class="desc">调用短信</span>
+      <button class="btn btn_primary" id="sendSmsToNumberBtn">sendSmsToNumber</button>
+
+      <h3 id="openContactItem">显示名片</h3>
+      <span class="desc">打开名片</span>
+      <button class="btn btn_primary" id="openContactItemBtn">openContactItem</button>
+
+      <h3 id="openContact">选择联系人</h3>
+      <span class="desc">选择联系人</span>
+      <button class="btn btn_primary" id="openContactBtn">openContact</button>
+
+
+      <h3 id="openDate">日期控件</h3>
+      <span class="desc">日期选择控件</span>
+      <button class="btn btn_primary" id="openDateBtn">openDate</button>
+
+      <h3 id="getLocation">取地理位置</h3>
+      <span class="desc">取地理位置</span>
+      <button class="btn btn_primary" id="getLocationBtn">getLocation</button>
+
+	<h3 id="exitWebApp">退出应用</h3>
+      <span class="desc">退出web应用</span>
+      <button class="btn btn_primary" id="exitWebAppBtn" onclick="exitWebApp();">exitWebApp</button>
+
+      <h3 id="openUrl">打开URL</h3>
+      <span class="desc">打开URL</span>
+      <button class="btn btn_primary" id="openUrlBtn">openUrl</button>
+
+    <h3 id="openMail">打开Email</h3>
+      <span class="desc">打开Email</span>
+      <button class="btn btn_primary" id="openMailBtn">openMail</button>
+
+    <h3 id="setWebTitle">设置标题</h3>
+      <span class="desc">设置标题</span>
+      <button class="btn btn_primary" id="setWebTitleBtn">setWebTitle</button>
+
+
+       <h3 id="setBarColor">设置bar颜色</h3>
+      <span class="desc">设置bar颜色</span>
+      <button class="btn btn_primary" id="setBarColorBtn">setBarColor</button>
+
+
+       <h3 id="showBar">显示/隐藏bar</h3>
+      <span class="desc">显示/隐藏bar</span>
+      <button class="btn btn_primary" id="showBarBtn">showBar</button>
+
+
+      <h3 id="setBar">设置bar</h3>
+      <span class="desc">设置bar</span>
+      <button class="btn btn_primary" id="setBarBtn">setBar</button>
+	  
+	  <h3 id="setBarClose">设置bar关闭回调</h3>
+      <span class="desc">设置bar关闭回调</span>
+      <button class="btn btn_primary" id="setBarCloseBtn">setBar close callback</button>
+
+	  <h3 id="pcWinodwClose">设置pc关闭回调</h3>
+      <span class="desc">设置pc关闭回调</span>
+      <button class="btn btn_primary" id="pcWinodwCloseBtn">WinodwClose</button>
+	  
+	  <h3 id="pgGoBack">pc返回回调</h3>
+      <span class="desc">设置pc返回回调</span>
+      <button class="btn btn_primary" id="pgGoBackBtn">pgGoBack</button>
+	  
+      <h3 id="apiList">取接口名称</h3>
+      <span class="desc">取接口名称</span>
+      <button class="btn btn_primary" id="apiListBtn">apiList</button>
+
+      <h3 id="webLog">写入日志</h3>
+      <span class="desc">写入web日志</span>
+      <button class="btn btn_primary" id="webLogBtn">webLog</button>
+
+
+       <h3 id="pullDownRefresh">下拉刷新</h3>
+      <span class="desc">打开下拉刷新</span>
+      <button class="btn btn_primary" id="pullDownRefreshBtn">pullDownRefresh</button>
+
+      <h3 id="QRcord">扫一扫</h3>
+         <span class="desc">扫一扫</span>
+         <button class="btn btn_primary" id="scanQRcodeBtn">scanQRCode</button>
+     <h3 id="Dialog">会话框</h3>
+            <span class="desc">会话框</span>
+            <button class="btn btn_primary" id="openDialogBtn">openDialog</button>
+    <h3 id="openWebApp">打开web应用</h3>
+           <span class="desc">进入web应用首页</span>
+           <button class="btn btn_primary" id="openWebAppBtn">openWebApp</button>
+    <h3 id="shareTo">分享接口</h3>
+           <span class="desc">分享到...</span>
+           <button class="btn btn_primary" id="shareToBtn">shareTo</button>
+		   
+	<h3 id="chooseImg">图片选择</h3>
+           <span class="desc">图片选择...</span>
+           <button class="btn btn_primary" id="chooseImgBtn">chooseImg</button>
+		   
+   <h3 id="selectSession">会话选择</h3>
+           <span class="desc">会话选择...</span>
+           <button class="btn btn_primary" id="selectSessionBtn">selectSession</button>
+	
+	<h3 id="getLanguage">获取语言</h3>
+           <span class="desc">获取语言...</span>
+           <button class="btn btn_primary" id="getLanguageBtn">getLanguage</button>
+
+	<iframe id="iframeBox" src="" frameborder="0">
+		</iframe>
+    </div>
+  </div>
+
+</body>
+<script src="static/js/eruda.min.js"  type="text/javascript"></script>
+<script src="static/js/index.js"  type="text/javascript"></script>
+<script>
+eruda.init();
+/*
+		//打开GZB窗口(正确ticket)
+	function openCommand(command){
+		var encodeCommand = base64encode(command);
+		
+		//alert(command);
+		//alert(encodeCommand);
+		//var gzb_app_url = "gzb://launcher.mygzb.com?ticket=" + getTicket() + "&command=" + encodeCommand;
+		var gzb_app_url = 'zhumu://launcher.zhumu.me/join?action=join&confno=1507814192&zc=6&mcv=0.92.11227.0929&browser=chrome';
+		//回调url
+		var callback = getCallbackUrl();
+		if(callback != null && callback != ""){
+			gzb_app_url = gzb_app_url + "&callback=" + callback.UrlEncode();
+		}
+		
+		//执行command
+		var iframe = document.getElementById('iframeBox');
+		iframe.src = gzb_app_url;
+		
+		//打开原生APP后需执行的任务
+		setTimeout(function(){
+		  afterOpenCommand();
+		},1000)
+	}
+	openCommand(1230);
+*/
+</script>
+
+</html>

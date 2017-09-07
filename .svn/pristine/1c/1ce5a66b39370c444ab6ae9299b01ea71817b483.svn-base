@@ -1,0 +1,158 @@
+body,pre {
+  line-height: 1.6;
+  font-family:'微软雅黑',"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+dd pre{
+	  background-color: #f1f0f6;
+	  margin: 1.2em 0;
+	  padding: 0.6em;
+	  border-radius: 4px;
+	  color: #000000;
+}
+*{margin: 0;padding: 0;}
+a {
+			text-decoration: none;
+			font-size: 1.2em;
+			display: block;
+		}
+
+		a.camera {
+			position: relative;
+			overflow: hidden
+		}
+
+		a.camera input {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+			text-align: center
+		}
+
+		.cam {
+			width: 90%;
+			margin: 20px auto;
+			display: none
+		}
+
+		.api {
+			margin: 0px auto;
+			width: 960px;
+		}
+
+		.api .item {
+			width: 707px;
+			float: right;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			border-top: 1px dashed #cdcdcd;
+			display: none;
+		}
+
+		.api .cur {
+			display: block
+		}
+
+		.api .item dt {
+			margin: 0;
+			padding: 21px 0 16px;
+			color: #111;
+			font-size: 18px;
+			line-height: 18px;
+			font-weight:900
+		}
+
+		.api .item dd {
+			margin: 0;
+			padding: 0 0 17px 0;
+			color: #333;
+			font-size: 16px;
+			font-weight: lighter;
+			line-height: 24px;
+			border-bottom: 1px dashed #cdcdcd;
+			position: relative;
+		}
+
+		.api .item dd .sup{
+			position: absolute;
+			right:0;
+			top:-68px;
+			width:282px;
+			height: 84px;
+			overflow: hidden;
+
+		}
+
+		.api .item dd .sup i{
+			margin-left: 10px;
+			width:84px;
+			height: 84px;
+			float: right;
+			display: block;
+			background: url(icons.png) no-repeat left top;
+		}
+		.api .item dd .sup i.android{
+			background-position: left top;
+		}
+		.api .item dd .sup i.win{
+			background-position: -84px top;
+		}
+		.api .item dd .sup i.ios{
+			background-position: right top;
+		}
+		.api .item dd .sup i.dis{
+			background-position-y:bottom;
+		}
+
+
+		.menu {
+			width: 227px;
+			float: left;
+			background-color: #fafafa;
+			margin: 0;
+			padding: 0;
+			text-indent: 1em;
+			overflow: hidden;
+		}
+
+		.menu li {
+			margin: 0;
+			list-style: none;
+			padding: 0;
+			height: 50px;
+			line-height: 50px;
+			font-weight: lighter;
+			font-size: 20px;
+		}
+
+		.menu li a {
+			display: block;
+			color: #333;
+			border-left: 4px solid #fafafa;
+		}
+
+		.menu li a.selected {
+			border-left: 4px solid #e60012;
+			background-color: #f4f3f3;
+			color: #333
+		}
+
+		.menu li a:hover {
+			border-left: 4px solid #f4f3f3;
+			background-color: #f4f3f3;
+			color: #333
+		}
+
+		.menu li a.selected:hover {
+			border-color: #e60012
+		}
+
+		.CodeMirror-scroll{ font-size: 14px;}
